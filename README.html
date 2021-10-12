@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Data Driven Development - D^3 &#8212; My Jupyter Book</title>
+    <title>Data Driven Development - D^3 &#8212; Data Driven Development</title>
     
   <link href="_static/css/theme.css" rel="stylesheet" />
   <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -72,7 +72,7 @@
       
       
       
-      <h1 class="site-logo" id="site-title">My Jupyter Book</h1>
+      <h1 class="site-logo" id="site-title">Data Driven Development</h1>
       
     </a>
 </div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
@@ -96,6 +96,18 @@
  <li class="toctree-l1">
   <a class="reference internal" href="data-sources/prometheus.html">
    Prometheus
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Kebechet Monitoring Guide
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="examples/kebechet/README.html">
+   Kebechet
   </a>
  </li>
 </ul>
@@ -150,6 +162,22 @@
 
             <!-- Source interaction buttons -->
 
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/AICoE/data-driven-development"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/AICoE/data-driven-development/issues/new?title=Issue%20on%20page%20%2FREADME.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
             <!-- Full screen (wrap in <a> to have style consistency -->
 
 <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
@@ -170,31 +198,14 @@
             <nav id="bd-toc-nav" aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#why">
-   Why
+  <a class="reference internal nav-link" href="#overview">
+   Overview
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#template-features">
-   Template Features
+  <a class="reference internal nav-link" href="#structure">
+   Structure
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#ai-coe-ci-github-application">
-     AI-CoE CI Github application
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#prow-ci">
-     Prow CI
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#pre-commit">
-     Pre-commit
-    </a>
-   </li>
-  </ul>
  </li>
 </ul>
 
@@ -209,32 +220,22 @@
                 
   <div class="section" id="data-driven-development-d-3">
 <h1>Data Driven Development - D^3<a class="headerlink" href="#data-driven-development-d-3" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="why">
-<h2>Why<a class="headerlink" href="#why" title="Permalink to this headline">¶</a></h2>
-<p>Similar to test-driven-development.</p>
-<p>You must be able to answer questions quick. I.e. combining different data sources, going back in time, changing the granularity.</p>
-<p>Be able to change the visualization: prototype in notebooks, create a dashboard, create a PDF report.</p>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>In today’s software development landscape, <strong>data</strong> plays a powerful role, which has led to the rise of the data driven development paradigm. The purpose of this repository is to consolidate and provide all the resources, guides and documentation necessary to foster data driven development.</p>
+<p>Good data driven development should not only collect lots of data and make them available, but we also need to aggregate the information in meaningful ways. The data-driven approach, particularly with well-defined benchmarks and metrics provides greater visibility into in-progress work being done by teams and also helps in important decision making processes. This allows each contributor to see the impact of their individual effort on overall project success (or failure) and also enables teams to effectively measure the level of success.</p>
+<p>Similar to test driven development, data driven development means that you must be able to answer questions quick, i.e. combining different data sources, going back in time, changing the granularity of data, being able to change the visualizations such as prototypying in Jupyter notebooks vs creating dashboards vs generating PDF reports.</p>
 </div>
-<div class="section" id="template-features">
-<h2>Template Features<a class="headerlink" href="#template-features" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="ai-coe-ci-github-application">
-<h3>AI-CoE CI Github application<a class="headerlink" href="#ai-coe-ci-github-application" title="Permalink to this headline">¶</a></h3>
-<p>AI-CoE CI provides easy and quick integration for build pipelines and checks for pull requests.</p>
-<p>An empty <span class="xref myst"><code class="docutils literal notranslate"><span class="pre">.aicoe-ci.yaml</span></code></span> is created here, disabling all checks via this CI provider by default. Documentation can be found <a class="reference external" href="https://github.com/AICoE/aicoe-ci/">here</a>.</p>
+<div class="section" id="structure">
+<h2>Structure<a class="headerlink" href="#structure" title="Permalink to this headline">¶</a></h2>
+<p>The repository is organized into the following directories:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/operate-first/data-driven-development/tree/main/data-presentation"><code class="docutils literal notranslate"><span class="pre">data-presentation</span></code></a> - This folder comprises of documentation/guides and best practices on how data can be represented in different ways by using various tools such as creating dashboards in <a class="reference external" href="https://grafana.com/">Grafana</a> or <a class="reference external" href="https://superset.apache.org/">Superset</a>, developing data visualizations using <a class="reference external" href="https://jupyter.org/">Jupyter notebooks</a> etc.</p></li>
+<li><p><a class="reference external" href="https://github.com/operate-first/data-driven-development/tree/main/data-sources"><code class="docutils literal notranslate"><span class="pre">data-sources</span></code></a> - This folder comprises of documentation and guides for various data sources used in the team such as <a class="reference external" href="https://prometheus.io/">Prometheus</a>, GitHub etc, what type of data is collected from these sources and in what context these data sources can be used.</p></li>
+<li><p><a class="reference external" href="https://github.com/operate-first/data-driven-development/tree/main/notebooks"><code class="docutils literal notranslate"><span class="pre">notebooks</span></code></a> - This folder comprises of Jupyter notebooks providing examples on how to interact with the different data sources and perform analysis on top of the data.</p></li>
+</ul>
 </div>
-<div class="section" id="prow-ci">
-<h3>Prow CI<a class="headerlink" href="#prow-ci" title="Permalink to this headline">¶</a></h3>
-<p>Prow is a CI provider developed for Kubernetes needs. Provides chat-ops management of pull requests, issues and declarative management for labels, branches and many more.</p>
-<p>We host our own deployment of Prow in Operate First available at <a class="reference external" href="https://prow.operate-first.cloud/">https://prow.operate-first.cloud/</a>.</p>
-<p>Supported commands are listed <a class="reference external" href="https://prow.operate-first.cloud/command-help">here</a>. We have also enabled Prow to consume on-repository configuration files. You can specify your config in <span class="xref myst"><code class="docutils literal notranslate"><span class="pre">.prow.yaml</span></code></span>. Additional centralized configuration can be found in the <a class="reference external" href="https://github.com/thoth-station/thoth-application/tree/master/prow/overlays/cnv-prod">thoth-application repository</a>.</p>
-</div>
-<div class="section" id="pre-commit">
-<h3>Pre-commit<a class="headerlink" href="#pre-commit" title="Permalink to this headline">¶</a></h3>
-<p>By extension to Prow, we define a default pre-commit config for new repositories. Default hook configuration can be found in <span class="xref myst"><code class="docutils literal notranslate"><span class="pre">.pre-commit-config.yaml</span></code></span>. Pre-commit is executed via Prow, see <span class="xref myst"><code class="docutils literal notranslate"><span class="pre">.prow.yaml</span></code></span> for details.</p>
-<p>We enable yamllint hook by default, since most of our repositories use yaml files extensively. Default configuration for this hook is located at <span class="xref myst"><code class="docutils literal notranslate"><span class="pre">yamllint-config.yaml</span></code></span>.</p>
-<p>To install and enable pre-commit locally please follow the instructions <a class="reference external" href="https://pre-commit.com/#quick-start">here</a>.</p>
-<p>It is advised for all contributors to enable pre-commit git hook via <code class="docutils literal notranslate"><span class="pre">pre-commit</span> <span class="pre">install</span></code> after cloning any repo within Operate First.</p>
-</div>
+<div class="toctree-wrapper compound">
 </div>
 <div class="toctree-wrapper compound">
 </div>
@@ -291,7 +292,7 @@
     <div class="container">
       <p>
         
-          By The Jupyter Book community<br/>
+          By AICoE<br/>
         
             &copy; Copyright 2021.<br/>
       </p>

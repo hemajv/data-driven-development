@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Prometheus &#8212; My Jupyter Book</title>
+    <title>Prometheus &#8212; Data Driven Development</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet" />
   <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -73,7 +73,7 @@
       
       
       
-      <h1 class="site-logo" id="site-title">My Jupyter Book</h1>
+      <h1 class="site-logo" id="site-title">Data Driven Development</h1>
       
     </a>
 </div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
@@ -97,6 +97,18 @@
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
    Prometheus
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Kebechet Monitoring Guide
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../examples/kebechet/README.html">
+   Kebechet
   </a>
  </li>
 </ul>
@@ -151,6 +163,22 @@
 
             <!-- Source interaction buttons -->
 
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/AICoE/data-driven-development"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/AICoE/data-driven-development/issues/new?title=Issue%20on%20page%20%2Fdata-sources/prometheus.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
             <!-- Full screen (wrap in <a> to have style consistency -->
 
 <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
@@ -171,13 +199,45 @@
             <nav id="bd-toc-nav" aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#long-term-storage">
-   Long term storage
+  <a class="reference internal nav-link" href="#purpose-and-use-of-prometheus">
+   Purpose and use of Prometheus
   </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#anatomy-of-a-prometheus-metric">
+   Anatomy of a Prometheus Metric
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#long-term-storage-thanos">
+   Long Term Storage: Thanos
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#accessing-prometheus-data">
+   Accessing Prometheus Data
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#promql">
+     PromQL
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#prometheus-api-client">
+     Prometheus API Client
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#caveats">
    Caveats
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#resources">
+   Resources
   </a>
  </li>
 </ul>
@@ -193,16 +253,73 @@
                 
   <div class="section" id="prometheus">
 <h1>Prometheus<a class="headerlink" href="#prometheus" title="Permalink to this headline">¶</a></h1>
-<p>type: time series
-granularity:</p>
-<div class="section" id="long-term-storage">
-<h2>Long term storage<a class="headerlink" href="#long-term-storage" title="Permalink to this headline">¶</a></h2>
-<p>thanos</p>
+<p><a class="reference external" href="https://prometheus.io/">Prometheus</a> is an open source systems monitoring and alerting toolkit. Prometheus provides time series data identified by metric name and key/value pairs for various services and applications being monitored.</p>
+<p><strong>Data Type</strong>: time series</p>
+<p><strong>Data Granularity</strong>: seconds, minutes, hours, days</p>
+<p><strong>Users</strong>: SRE (Site Reliability Engineering) teams, DevOps teams, Data Scientists</p>
+<p><strong>Example Prometheus Instance</strong>: <a class="reference external" href="http://demo.robustperception.io:9090/graph">http://demo.robustperception.io:9090/graph</a></p>
+<p><img alt="prometheus-timeseries-graph" src="../_images/prometheus-timeseries-graph.png" /></p>
+<p>Shown above is the Prometheus UI which allows you to search and aggregate different time series metrics and view them as a graph.</p>
+<div class="section" id="purpose-and-use-of-prometheus">
+<h2>Purpose and use of Prometheus<a class="headerlink" href="#purpose-and-use-of-prometheus" title="Permalink to this headline">¶</a></h2>
+<p>Prometheus has become the industry standard for monitoring, and is implemented by software companies worldwide. It supports multidimensional data collection and data queuing, and is reliable, allowing customers to quickly diagnose problems.</p>
+<p><strong>Operations Perspective</strong> - From an operations standpoint, Prometheus is useful in tracking the performance of various services/applications and enables SRE teams to effectively diagnose, troubleshoot and handle incidents for any degradation of services.</p>
+<p><strong>Data Science Perspective</strong> - From a Data Science standpoint, Prometheus provides a large collection of time series data for exploring and applying ML methods to solve unique problems such as time series forecasting to predict a future system failure or anomaly detection to identify erratic or erroneous system behavior.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.operate-first.cloud/data-science/time-series/notebooks/ts-4-forecasting.ipynb">Example of Time Series Forecasting</a></p></li>
+<li><p><a class="reference external" href="https://learn.openshift.com/ai-machine-learning/prometheus-timeseries-forecasting/">Interactive Time Series Forecasting Tutorial</a></p></li>
+</ul>
+</div>
+<div class="section" id="anatomy-of-a-prometheus-metric">
+<h2>Anatomy of a Prometheus Metric<a class="headerlink" href="#anatomy-of-a-prometheus-metric" title="Permalink to this headline">¶</a></h2>
+<p>A metric in Prometheus consists of:</p>
+<ul class="simple">
+<li><p><strong>metric name</strong> - The name of the metric Eg: <code class="docutils literal notranslate"><span class="pre">http_requests_total</span></code></p></li>
+<li><p><strong>labels (key/value pair)</strong> - Labels enable Prometheus’s dimensional data model: any given combination of labels for the same metric name identifies a particular dimensional instantiation of that metric.
+For example, <code class="docutils literal notranslate"><span class="pre">http_requests_total{method=&quot;POST&quot;,</span> <span class="pre">handler=&quot;/messages&quot;,</span> <span class="pre">code=&quot;200&quot;}</span></code> has the labels <code class="docutils literal notranslate"><span class="pre">method</span></code>, <code class="docutils literal notranslate"><span class="pre">handler</span></code> and <code class="docutils literal notranslate"><span class="pre">code</span></code> which have the values <code class="docutils literal notranslate"><span class="pre">POST</span></code>, <code class="docutils literal notranslate"><span class="pre">/messages</span></code> and <code class="docutils literal notranslate"><span class="pre">202</span></code> respectively.</p></li>
+<li><p><strong>timestamp/value</strong> - For each metric, Prometheus records and outputs the timestamp and the value of the metric at that give timestamp.</p></li>
+</ul>
+<p><img alt="anatomy-metric" src="../_images/anatomy-metric.png" /></p>
+<p><strong>Metric Notation</strong>: <code class="docutils literal notranslate"><span class="pre">&lt;metric</span> <span class="pre">name&gt;{&lt;label</span> <span class="pre">name&gt;=&lt;label</span> <span class="pre">value&gt;,</span> <span class="pre">...}</span></code></p>
+</div>
+<div class="section" id="long-term-storage-thanos">
+<h2>Long Term Storage: Thanos<a class="headerlink" href="#long-term-storage-thanos" title="Permalink to this headline">¶</a></h2>
+<p>Prometheus includes a local on-disk time series database (TSDB), but also optionally integrates with remote storage systems. By default, Prometheus stores data to local TSDB which has a retention period of 15 days, any data outside this retention is automatically deleted. In order to store the data for long term, we recommend setting up <a class="reference external" href="https://thanos.io/">Thanos</a>. Thanos is a highly available Prometheus setup with long term storage capabilities and unlimited retention policies. Thanos also helps in downsampling historical data for massive query speedup when querying large time ranges. You can follow <a class="reference external" href="https://thanos.io/tip/thanos/getting-started.md/">this</a> guide for more details on how to setup Thanos.</p>
+</div>
+<div class="section" id="accessing-prometheus-data">
+<h2>Accessing Prometheus Data<a class="headerlink" href="#accessing-prometheus-data" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="promql">
+<h3>PromQL<a class="headerlink" href="#promql" title="Permalink to this headline">¶</a></h3>
+<p>Similar to SQL, Prometheus has a querying language called <a class="reference external" href="https://prometheus.io/docs/prometheus/latest/querying/basics/">PromQL</a> that can be used to fetch, query and aggregate the time series metrics. The result of a PromQL expression can either be shown as a graph, viewed as tabular data in Prometheus’s expression browser, or consumed by external systems via the <a class="reference external" href="https://prometheus.io/docs/prometheus/latest/querying/api/">HTTP API</a>.</p>
+<p>PromQL may require some practice before you get the hang of it, but here are some great cheat sheets that can help you get started:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://promlabs.com/promql-cheat-sheet/">https://promlabs.com/promql-cheat-sheet/</a></p></li>
+<li><p><a class="reference external" href="https://timber.io/blog/promql-for-humans/">https://timber.io/blog/promql-for-humans/</a></p></li>
+</ul>
+<p>Here is an example of a PromQL query that finds the <code class="docutils literal notranslate"><span class="pre">sum</span></code> of all HTTP requests grouped by the label <code class="docutils literal notranslate"><span class="pre">code</span></code> which indicates the status codes of the HTTP request such as <code class="docutils literal notranslate"><span class="pre">200(Success),</span> <span class="pre">404(Server</span> <span class="pre">not</span> <span class="pre">Found),</span> <span class="pre">500(Internal</span> <span class="pre">Server</span> <span class="pre">Error)</span></code> etc:</p>
+<p><img alt="promql-example" src="../_images/promql-example.png" /></p>
+</div>
+<div class="section" id="prometheus-api-client">
+<h3>Prometheus API Client<a class="headerlink" href="#prometheus-api-client" title="Permalink to this headline">¶</a></h3>
+<p>Prometheus metrics can also be programmatically accessed via API client libraries. We have <code class="docutils literal notranslate"><span class="pre">prometheus-api-client</span></code>, a Python wrapper for the Prometheus HTTP API along with additional functionality for further metric processing. This API client can be used to fetch, query and perform metric processing within Python supported environments such as Jupyter notebooks and is particularly useful for Data Scientists who are interested in examining these time series type of data.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/AICoE/prometheus-api-client-python">API Client</a></p></li>
+<li><p><a class="reference external" href="https://github.com/AICoE/prometheus-api-client-python/blob/master/examples/MetricsList_example.ipynb">Example Jupyter Notebook</a> - This example Jupyter notebook explains the API client library and its functions supported</p></li>
+<li><p><a class="reference external" href="https://learn.openshift.com/ai-machine-learning/prometheus-api-client/">Tutorial</a> - Interactive tutorial on using the Prometheus API client library</p></li>
+</ul>
+</div>
 </div>
 <div class="section" id="caveats">
 <h2>Caveats<a class="headerlink" href="#caveats" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><p>beware combanatory explosion of labels</p></li>
+<li><p>As Prometheus metrics have many labels, they have to be carefully combined with other metrics and this can result in an explosion of metric label pairs, making it complex and compute intensive to query</p></li>
+</ul>
+</div>
+<div class="section" id="resources">
+<h2>Resources<a class="headerlink" href="#resources" title="Permalink to this headline">¶</a></h2>
+<p>Here are some resources which have useful tips and tricks for interacting with Prometheus metrics:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.robustperception.io/tag/promql">Robust Perception Blogs</a> - This is a great collection of blogs that provide help for PromQL</p></li>
 </ul>
 </div>
 </div>
@@ -263,7 +380,7 @@ granularity:</p>
     <div class="container">
       <p>
         
-          By The Jupyter Book community<br/>
+          By AICoE<br/>
         
             &copy; Copyright 2021.<br/>
       </p>
