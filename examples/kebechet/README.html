@@ -51,6 +51,7 @@
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Accessing and Analyzing Metrics" href="accessing_metrics.html" />
     <link rel="prev" title="&lt;no title&gt;" href="../../notebooks/prometheus.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -101,13 +102,18 @@
 </ul>
 <p class="caption">
  <span class="caption-text">
-  Kebechet Monitoring Guide
+  Monitoring Applications Guide
  </span>
 </p>
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
    Kebechet
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="accessing_metrics.html">
+   Accessing and Analyzing Metrics
   </a>
  </li>
 </ul>
@@ -202,6 +208,11 @@
    Architecture
   </a>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#sequence-diagrams">
+   Sequence Diagrams
+  </a>
+ </li>
 </ul>
 
             </nav>
@@ -226,6 +237,18 @@ replacement for it).</p>
 <h2>Architecture<a class="headerlink" href="#architecture" title="Permalink to this headline">¶</a></h2>
 <p>The components and workflows of Kebechet can be found in the architecture schema below:</p>
 <p><img alt="Kebechet Schema" src="../../_images/kebechet-schema.png" /></p>
+</div>
+<div class="section" id="sequence-diagrams">
+<h2>Sequence Diagrams<a class="headerlink" href="#sequence-diagrams" title="Permalink to this headline">¶</a></h2>
+<p>The two images below show two sequence diagrams of the behaviour of Kebechet in two cases:</p>
+<ul class="simple">
+<li><p>when some user interacts with the GitHub App (external-trigger).</p></li>
+</ul>
+<p><img alt="Kebechet Schema" src="../../_images/kebechet-schema-external-trigger.png" /></p>
+<ul class="simple">
+<li><p>when internal components triggers learning of new knowledge and share of this knowledge with users (internal trigger)</p></li>
+</ul>
+<p><img alt="Kebechet Schema" src="../../_images/kebechet-schema-internal-trigger-package-release.png" /></p>
 </div>
 </div>
 
@@ -267,6 +290,15 @@ replacement for it).</p>
             </div>
         </a>
     </div>
+     <div id="next">
+        <a class="right-next" href="accessing_metrics.html" title="next page">
+            <div class="prevnext-info">
+                <p class="prevnext-label">next</p>
+                <p class="prevnext-title">Accessing and Analyzing Metrics</p>
+            </div>
+            <i class="prevnext-label fas fa-angle-right"></i>
+        </a>
+     </div>
 
 </div>
         
