@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>&lt;no title&gt; &#8212; Data Driven Development</title>
+    <title>Superset &#8212; Data Driven Development</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet" />
   <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -51,8 +51,8 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="&lt;no title&gt;" href="../data-sources/github.html" />
-    <link rel="prev" title="&lt;no title&gt;" href="jupyter-notebook.html" />
+    <link rel="next" title="&lt;no title&gt;" href="../notebooks/prometheus.html" />
+    <link rel="prev" title="Grafana Dashboards" href="grafana.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -102,13 +102,45 @@
 </ul>
 <p class="caption">
  <span class="caption-text">
+  Data Presentation
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="grafana.html">
+   Grafana Dashboards
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Superset
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
   Monitoring Applications Guide
  </span>
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
+  <a class="reference internal" href="../examples/README.html">
+   Monitoring Applications
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="../examples/kebechet/README.html">
    Kebechet
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../examples/kebechet/tooling.html">
+   Tooling
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../examples/kebechet/metrics.html">
+   Monitoring Metrics
   </a>
  </li>
  <li class="toctree-l1">
@@ -202,7 +234,12 @@
                 <i class="fas fa-list"></i> Contents
             </div>
             <nav id="bd-toc-nav" aria-label="Page">
-                <ul class="simple visible nav section-nav flex-column">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#getting-started-with-superset">
+   Getting Started with Superset
+  </a>
+ </li>
 </ul>
 
             </nav>
@@ -214,7 +251,68 @@
         
               <div>
                 
-  
+  <div class="section" id="superset">
+<h1>Superset<a class="headerlink" href="#superset" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="https://superset.apache.org/">Apache Superset</a> is an open source modern data exploration and visualization platform. Superset can query data from any SQL-speaking data store or data engine. Some of the databases supported are <a class="reference external" href="https://www.postgresql.org/">PostgreSQL</a>, <a class="reference external" href="https://www.mysql.com/">MySQL</a>, <a class="reference external" href="https://trino.io/">Trino</a> etc. Superset comes with an intuitive interface for visualizing datasets and creating interactive dashboards. It also has an in-built SQL lab to explore and test your queries.</p>
+<div class="section" id="getting-started-with-superset">
+<h2>Getting Started with Superset<a class="headerlink" href="#getting-started-with-superset" title="Permalink to this headline">¶</a></h2>
+<p><strong>Step 1: Installing Superset</strong></p>
+<p>Superset can be installed on many different operating systems.  For a list of the minimum hardware and software requirements, as well as instructions on installing Superset, refer to <a class="reference external" href="https://superset.apache.org/docs/installation/installing-superset-using-docker-compose">Install Superset</a>.</p>
+<p>We have Superset deployed in one of the <a class="reference external" href="https://www.operate-first.cloud/">Operate First</a> instances and it can be accessed <a class="reference external" href="https://superset.operate-first.cloud/">here</a>.
+The Operate First Superset primarily uses a <a class="reference external" href="https://trino.io/">Trino</a> database, but also onboards other teams to connect their own databases. You can follow the instructions for accessing and creating dashboards <a class="reference external" href="https://www.operate-first.cloud/users/support/docs/trino_superset_user_guide.md">here</a>.</p>
+<p><strong>Step 2: Connecting to Databases</strong></p>
+<p>Superset requires a Python DB-API database driver and a SQLAlchemy dialect to be installed for each datastore you want to connect to.
+You can read more <a class="reference external" href="https://superset.apache.org/docs/databases/dockeradddrivers">here</a> about how to install new database drivers into your Superset configuration.</p>
+<p>You’ll need to install the required packages for the database you want to use as your metadata database as well as the packages needed to connect to the databases you want to access through Superset. For example, if you wish to use Trino you will need to install the required package:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">sqlalchemy</span><span class="o">-</span><span class="n">trino</span>
+</pre></div>
+</div>
+<p>For more information on configuring databases refer <a class="reference external" href="https://superset.apache.org/docs/databases/installing-database-drivers">here</a>.</p>
+<p><strong>Step 3: Adding Database to Superset</strong></p>
+<p>Once you have the database drivers installed and connected, you can login to Superset and add the database from the UI by:</p>
+<ol class="simple">
+<li><p>Clicking on <code class="docutils literal notranslate"><span class="pre">Data</span> <span class="pre">-&gt;</span> <span class="pre">Databases</span> <span class="pre">-&gt;</span> <span class="pre">+</span> <span class="pre">Database</span></code></p></li>
+<li><p>Provide the database configuration</p></li>
+</ol>
+<img src="../assets/images/superset-add-db.png" width="700">
+<ol class="simple">
+<li><p>Click on <code class="docutils literal notranslate"><span class="pre">Test</span> <span class="pre">Connection</span></code> to check if your database configuration is successful</p></li>
+</ol>
+<p><strong>Step 4: Adding Datasets</strong></p>
+<p>Once you have successfully configured the database, you can now start importing your data. The data stored in your database should be imported into suitable tables and these tables can then be imported as datasets into Superset that are used for creating queries and generating charts.</p>
+<p>You can use a suitable database management tool for creating tables, schemas, views etc to import data. We use <a class="reference external" href="https://cloudbeaver.io/">CloudBeaver</a>, a popular web application which provides a rich UI for working and interacting with SQL databases. You can <a class="reference external" href="https://cloudbeaver.io/docs/Administration/">configure your database in CloudBeaver</a> and start creating tables like so:</p>
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="k">IF</span> <span class="k">NOT</span> <span class="k">EXISTS</span> <span class="o">&lt;</span><span class="k">database</span> <span class="n">catalog</span> <span class="n">name</span><span class="o">&gt;</span><span class="p">.</span><span class="o">&lt;</span><span class="k">schema</span> <span class="n">name</span><span class="o">&gt;</span><span class="p">.</span><span class="o">&lt;</span><span class="k">table</span> <span class="n">name</span><span class="o">&gt;</span> <span class="p">(</span>
+        <span class="o">&lt;</span><span class="k">column</span> <span class="n">name</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">data</span> <span class="n">type</span><span class="o">&gt;</span><span class="p">,</span>
+        <span class="o">&lt;</span><span class="k">column</span> <span class="n">name</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">data</span> <span class="n">type</span><span class="o">&gt;</span><span class="p">,</span>
+        <span class="p">...</span>
+<span class="p">)</span>
+<span class="k">WITH</span> <span class="p">(</span>
+   <span class="n">external_location</span> <span class="o">=</span> <span class="s1">&#39;&lt;path_to_data_folder&gt;&#39;</span><span class="p">,</span>
+   <span class="n">format</span> <span class="o">=</span> <span class="s1">&#39;&lt;CSV,JSON,PARQUET etc&gt;&#39;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>We use S3 buckets to store our datasets and create suitable tables for them in our Trino databases with the help of CloudBeaver.</p>
+<p>Once you have the tables created in your database, you can go ahead and import them to Superset by:</p>
+<ol class="simple">
+<li><p>Clicking on <code class="docutils literal notranslate"><span class="pre">Data</span> <span class="pre">-&gt;</span> <span class="pre">Datasets</span> <span class="pre">-&gt;</span> <span class="pre">+</span> <span class="pre">Dataset</span></code></p></li>
+<li><p>Provide the table information</p></li>
+</ol>
+<img src="../assets/images/superset-add-dataset.png" width="500">
+<ol class="simple">
+<li><p>Add the dataset</p></li>
+</ol>
+<p><strong>Step 5: Creating Charts</strong></p>
+<p>To create a chart, click on the <strong>Charts</strong> tab on top and add a new chart by clicking on the <strong>+ Chart</strong> button. Select the dataset (that you added above) and the visualization type. Based on the chart type selected, you will have various fields to edit and write appropriate SQL queries for visualizing the data.</p>
+<p><strong>Step 6: Adding a Dashboard</strong></p>
+<p>You can save your charts and add them to a new or existing dashboard. In order to share your dashboard with others, make sure to click on <strong>Publish</strong> next to the dashboard title name and copy the dashboard URL generated. You can also edit the properties of each dashboard. To do so, click on the <strong>Dashboards</strong> tab to view the list of dashboards. Hover under the <strong>Actions</strong> column next to the dashboard name you are interested in. Click on the <strong>pencil icon</strong>, to edit the fields such as adding owners to the dashboard, creating a readable URL for the dashboard etc.</p>
+<p><strong>Step 7: Exporting Dashboards</strong></p>
+<p>Another useful feature of Superset is the ability to quickly export dashboards. To export a dashboard first go to the <strong>Dashboards</strong> tab of the top bar. Next, hover under the <strong>Actions</strong> column next to the dashboard you would like to export. Finally, click on the arrow icon to export the dashboard and a JSON file download should start. Make sure that you have pop-ups enabled for this page or the download might not run.</p>
+<p>Congratulations you have created your first dashboard using Superset!</p>
+<p>You can follow the above mentioned steps in more detail on our <a class="reference external" href="https://www.operate-first.cloud/users/support/docs/trino_superset_user_guide.md">Operate First website</a>.</p>
+</div>
+</div>
+
     <script type="text/x-thebe-config">
     {
         requestKernel: true,
@@ -245,16 +343,16 @@
 <div class='prev-next-bottom'>
     
     <div id="prev">
-        <a class="left-prev" href="jupyter-notebook.html" title="previous page">
+        <a class="left-prev" href="grafana.html" title="previous page">
             <i class="prevnext-label fas fa-angle-left"></i>
             <div class="prevnext-info">
                 <p class="prevnext-label">previous</p>
-                <p class="prevnext-title">&lt;no title&gt;</p>
+                <p class="prevnext-title">Grafana Dashboards</p>
             </div>
         </a>
     </div>
      <div id="next">
-        <a class="right-next" href="../data-sources/github.html" title="next page">
+        <a class="right-next" href="../notebooks/prometheus.html" title="next page">
             <div class="prevnext-info">
                 <p class="prevnext-label">next</p>
                 <p class="prevnext-title">&lt;no title&gt;</p>

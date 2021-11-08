@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>&lt;no title&gt; &#8212; Data Driven Development</title>
+    <title>Grafana Dashboards &#8212; Data Driven Development</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet" />
   <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -51,8 +51,8 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="&lt;no title&gt;" href="jupyter-notebook.html" />
-    <link rel="prev" title="Data Driven Development - D^3" href="../README.html" />
+    <link rel="next" title="Superset" href="superset.html" />
+    <link rel="prev" title="Prometheus" href="../data-sources/prometheus.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -102,13 +102,45 @@
 </ul>
 <p class="caption">
  <span class="caption-text">
+  Data Presentation
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Grafana Dashboards
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="superset.html">
+   Superset
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
   Monitoring Applications Guide
  </span>
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
+  <a class="reference internal" href="../examples/README.html">
+   Monitoring Applications
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="../examples/kebechet/README.html">
    Kebechet
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../examples/kebechet/tooling.html">
+   Tooling
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../examples/kebechet/metrics.html">
+   Monitoring Metrics
   </a>
  </li>
  <li class="toctree-l1">
@@ -202,7 +234,34 @@
                 <i class="fas fa-list"></i> Contents
             </div>
             <nav id="bd-toc-nav" aria-label="Page">
-                <ul class="simple visible nav section-nav flex-column">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#getting-started-with-grafana">
+   Getting Started With Grafana
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#step-1-installing-grafana">
+     Step 1: Installing Grafana
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#step-2-log-in">
+     Step 2: Log In
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#step-3-create-a-dashboard">
+     Step 3: Create a Dashboard
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#step-4-storing-and-managing-dashboards">
+     Step 4: Storing and Managing Dashboards
+    </a>
+   </li>
+  </ul>
+ </li>
 </ul>
 
             </nav>
@@ -214,7 +273,81 @@
         
               <div>
                 
-  
+  <div class="section" id="grafana-dashboards">
+<h1>Grafana Dashboards<a class="headerlink" href="#grafana-dashboards" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="https://grafana.com/">Grafana</a> is an open source metric analytics &amp; visualization suite. It is most commonly used for visualizing time series data for infrastructure and application analytics but many use it in other domains including industrial sensors, home automation, weather, and process control. Grafana allows users to create dashboards with panels, each representing specific metrics over a set time-frame. Every dashboard is versatile and could be custom-tailored for a specific project or any development and/or business needs.</p>
+<div class="section" id="getting-started-with-grafana">
+<h2>Getting Started With Grafana<a class="headerlink" href="#getting-started-with-grafana" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="step-1-installing-grafana">
+<h3>Step 1: Installing Grafana<a class="headerlink" href="#step-1-installing-grafana" title="Permalink to this headline">¶</a></h3>
+<p>Grafana can be installed on many different operating systems. For a list of the minimum hardware and software requirements, as well as instructions on installing Grafana, refer to <a class="reference external" href="https://grafana.com/docs/grafana/latest/installation/">Install Grafana</a>.</p>
+<p>We have <a class="reference external" href="https://grafana.com/">Grafana</a> deployed in one of the <a class="reference external" href="https://www.operate-first.cloud/">Operate First</a> instances and it can be accessed <a class="reference external" href="https://console-openshift-console.apps.smaug.na.operate-first.cloud/k8s/ns/opf-monitoring/routes/grafana">here</a>. You can follow the instructions for accessing and adding dashboards <a class="reference external" href="https://www.operate-first.cloud/users/apps/docs/odh/grafana/README.md">here</a>.</p>
+</div>
+<div class="section" id="step-2-log-in">
+<h3>Step 2: Log In<a class="headerlink" href="#step-2-log-in" title="Permalink to this headline">¶</a></h3>
+<p>To log in to Grafana (installed locally) for the first time:</p>
+<ol class="simple">
+<li><p>Open your web browser and go to <a class="reference external" href="http://localhost:3000/">http://localhost:3000/</a>. The default HTTP port that Grafana listens to is 3000 unless you have configured a different port.</p></li>
+<li><p>On the login page, enter <code class="docutils literal notranslate"><span class="pre">admin</span></code> for username and password.</p></li>
+<li><p>Click <strong>Log in</strong>. If login is successful, then you will see a prompt to change the password.</p></li>
+<li><p>Click <strong>OK</strong> on the prompt, then change your password.</p></li>
+</ol>
+</div>
+<div class="section" id="step-3-create-a-dashboard">
+<h3>Step 3: Create a Dashboard<a class="headerlink" href="#step-3-create-a-dashboard" title="Permalink to this headline">¶</a></h3>
+<p>Before creating a new dashboard, let’s get familiar with some of the components in Grafana.</p>
+<p><strong>Grafana Notions:</strong></p>
+<ul class="simple">
+<li><p><strong>Data Source</strong>- Grafana supports many different storage backends for your time series data <strong>(Data Source)</strong>. Each Data Source has a specific Query Editor that is customized for the features and capabilities that the particular Data Source exposes. The following data sources are officially supported: <a class="reference external" href="https://grafana.com/docs/features/datasources/graphite/">Graphite</a>, <a class="reference external" href="https://grafana.com/docs/features/datasources/influxdb/">InfluxDB</a>, <a class="reference external" href="https://grafana.com/docs/features/datasources/opentsdb/">OpenTSDB</a>, <a class="reference external" href="https://grafana.com/docs/features/datasources/prometheus/">Prometheus</a>, <a class="reference external" href="https://grafana.com/docs/features/datasources/elasticsearch/">Elasticsearch</a>, <a class="reference external" href="https://grafana.com/docs/features/datasources/cloudwatch/">CloudWatch</a>.</p></li>
+</ul>
+<p><img alt="Grafana Data Source" src="../_images/gf-data-source.png" /></p>
+<ul class="simple">
+<li><p><strong>Panel</strong> - A panel is the basic visualization building block presented per the metrics selected. Grafana supports graph, singlestat, table, heatmap, and freetext panels, as well as integration with official and community-built plugins (like world map or clock) and apps that could be visualized, too. Each panel can be customized in terms of style and format; all panels could be dragged, dropped, resized, and rearranged. You can learn more about panels <a class="reference external" href="https://grafana.com/docs/grafana/latest/panels/">here</a>.</p></li>
+</ul>
+<p><img alt="Grafana Panel" src="../_images/gf-panel.gif" /></p>
+<ul class="simple">
+<li><p><strong>Dashboard</strong> - A dashboard is a set of individual panels arranged on a grid with a set of variables (like server, application and sensor name). By changing variables, you can switch the data being displayed in a dashboard (for instance, data from two separate servers). All dashboards could be customized and sliced and diced depending on the user’s needs. Grafana has a large community of contributors and users, so there is a large ecosystem of ready-made dashboards for different data types and sources. You can learn more about dashboards <a class="reference external" href="https://grafana.com/docs/grafana/latest/dashboards/">here</a>.</p></li>
+</ul>
+<p><img alt="Grafana Dashboard" src="../_images/gf-dashboard.gif" /></p>
+<ul class="simple">
+<li><p><strong>Query Editor</strong> - The query editor exposes capabilities of your data source and allows you to query the metrics that it contains. Use the Query Editor to build one or more queries (for one or more series) in your time series database. The panel will instantly update allowing you to effectively explore your data in real time and build a perfect query for that particular panel.</p></li>
+</ul>
+<p><img alt="Grafana Query Editor" src="../_images/gf-query-editor.gif" /></p>
+<p>Now that you are familiar with the components, you can go ahead and start creating your dashboards.</p>
+<p>To create your first dashboard:</p>
+<ol>
+<li><p>Configure your data source by going to <strong>Configuration (Gear icon) -&gt; Data Sources -&gt; Add data source</strong></p>
+<ol>
+<li><p>Select the data source you want to configure</p></li>
+<li><p>Provide the data source details</p>
+<p><img alt="Grafana add data source" src="../_images/gf-add-data-source.png" /></p>
+</li>
+<li><p>Click <strong>Save and Test</strong></p></li>
+<li><p>If successful, you will see the data source added</p></li>
+</ol>
+</li>
+<li><p>Click the <strong>+</strong> icon on the left hand side menu</p></li>
+<li><p>On the dashboard, click <strong>Add an empty panel</strong></p></li>
+<li><p>In the New dashboard/Edit panel view, go to the <strong>Query tab</strong></p></li>
+<li><p>Configure your query by selecting your data source from the data source selector</p></li>
+<li><p>Click the <strong>Save</strong> icon in the top right corner of your screen to save the dashboard</p></li>
+<li><p>Add a descriptive name, and then click <strong>Save</strong></p></li>
+</ol>
+<p>Congratulations, you have created your first dashboard and it is displaying results!</p>
+</div>
+<div class="section" id="step-4-storing-and-managing-dashboards">
+<h3>Step 4: Storing and Managing Dashboards<a class="headerlink" href="#step-4-storing-and-managing-dashboards" title="Permalink to this headline">¶</a></h3>
+<p>You can store and also maintain your dashboards via GitOps. Any changes require code changes and review via PRs. Dashboards can be stored in Gitlab/Github repositories as yaml k8s config maps that are applied to the cluster and mounted by Grafana. Grafana dashboards can be easily imported and exported as JSON files.</p>
+<p><strong>Exporting Dashboards</strong></p>
+<p>The export feature is accessed in the share window which you open by clicking the share button in the dashboard menu.</p>
+<p><img alt="Grafana export" src="../_images/gf-export.png" /></p>
+<p>Copy the JSON model for the dashboard and insert into the config map YAML and commit to the repository in GitHub where the Grafana manifests are defined and deployed from.</p>
+<p><img alt="Grafana JSON" src="../_images/gf-json.png" /></p>
+<p>Make a Pull Request for this dashboard in GitHub. You can follow the instructions <a class="reference external" href="https://www.operate-first.cloud/users/apps/docs/odh/grafana/add_grafana_dashboard.md">here</a> for adding dashboards to the <a class="reference external" href="https://console-openshift-console.apps.smaug.na.operate-first.cloud/k8s/ns/opf-monitoring/routes/grafana">Operate First Grafana</a> instance.</p>
+</div>
+</div>
+</div>
+
     <script type="text/x-thebe-config">
     {
         requestKernel: true,
@@ -245,19 +378,19 @@
 <div class='prev-next-bottom'>
     
     <div id="prev">
-        <a class="left-prev" href="../README.html" title="previous page">
+        <a class="left-prev" href="../data-sources/prometheus.html" title="previous page">
             <i class="prevnext-label fas fa-angle-left"></i>
             <div class="prevnext-info">
                 <p class="prevnext-label">previous</p>
-                <p class="prevnext-title">Data Driven Development - D^3</p>
+                <p class="prevnext-title">Prometheus</p>
             </div>
         </a>
     </div>
      <div id="next">
-        <a class="right-next" href="jupyter-notebook.html" title="next page">
+        <a class="right-next" href="superset.html" title="next page">
             <div class="prevnext-info">
                 <p class="prevnext-label">next</p>
-                <p class="prevnext-title">&lt;no title&gt;</p>
+                <p class="prevnext-title">Superset</p>
             </div>
             <i class="prevnext-label fas fa-angle-right"></i>
         </a>

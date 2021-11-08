@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Kebechet &#8212; Data Driven Development</title>
+    <title>Monitoring Metrics &#8212; Data Driven Development</title>
     
   <link href="../../_static/css/theme.css" rel="stylesheet" />
   <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -51,8 +51,8 @@
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Tooling" href="tooling.html" />
-    <link rel="prev" title="Monitoring Applications" href="../README.html" />
+    <link rel="next" title="Accessing and Analyzing Metrics" href="accessing_metrics.html" />
+    <link rel="prev" title="Tooling" href="tooling.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -128,8 +128,8 @@
    Monitoring Applications
   </a>
  </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="README.html">
    Kebechet
   </a>
  </li>
@@ -138,8 +138,8 @@
    Tooling
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="metrics.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    Monitoring Metrics
   </a>
  </li>
@@ -189,7 +189,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../../_sources/examples/kebechet/README.md"><button type="button"
+        <a class="dropdown-buttons" href="../../_sources/examples/kebechet/metrics.md"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.md</button></a>
         <!-- Download PDF via print -->
@@ -209,7 +209,7 @@
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
-            href="https://github.com/AICoE/data-driven-development/issues/new?title=Issue%20on%20page%20%2Fexamples/kebechet/README.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/AICoE/data-driven-development/issues/new?title=Issue%20on%20page%20%2Fexamples/kebechet/metrics.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
         
@@ -235,19 +235,14 @@
             </div>
             <nav id="bd-toc-nav" aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#architecture">
-   Architecture
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Monitoring Metrics
   </a>
  </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#sequence-diagrams">
-   Sequence Diagrams
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#monitoring">
-   Monitoring
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#recommended-metrics-kebechet">
+   Recommended Metrics: Kebechet
   </a>
  </li>
 </ul>
@@ -261,44 +256,170 @@
         
               <div>
                 
-  <div class="section" id="kebechet">
-<h1>Kebechet<a class="headerlink" href="#kebechet" title="Permalink to this headline">¶</a></h1>
-<blockquote>
-<div><p>I’m Kebechet, goddess of freshness. I will keep your sources and dependencies fresh and up-to-date.</p>
-</div></blockquote>
-<p><a class="reference external" href="https://github.com/thoth-station/kebechet">Kebechet</a> is a SourceOps bot that automates updating dependencies of your project. Currently, it supports managing and
-updating Python projects based on <a class="reference external" href="https://docs.pipenv.org/">pipenv</a> files (<code class="docutils literal notranslate"><span class="pre">Pipfile</span></code> and <code class="docutils literal notranslate"><span class="pre">Pipfile.lock</span></code>) or
-<code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code>/<code class="docutils literal notranslate"><span class="pre">requirements.in</span></code> files (see <a class="reference external" href="https://pypi.org/project/pip-tools/">pip-tools</a> - Kebechet is a
-replacement for it).</p>
-<div class="section" id="architecture">
-<h2>Architecture<a class="headerlink" href="#architecture" title="Permalink to this headline">¶</a></h2>
-<p>The components and workflows of Kebechet can be found in the architecture schema below:</p>
-<p><img alt="Kebechet Schema" src="../../_images/kebechet-schema.png" /></p>
-</div>
-<div class="section" id="sequence-diagrams">
-<h2>Sequence Diagrams<a class="headerlink" href="#sequence-diagrams" title="Permalink to this headline">¶</a></h2>
-<p>The two images below show two sequence diagrams of the behaviour of Kebechet in two cases:</p>
+  <div class="section" id="monitoring-metrics">
+<h1>Monitoring Metrics<a class="headerlink" href="#monitoring-metrics" title="Permalink to this headline">¶</a></h1>
+<p>Based on the type of application, we can define relevant metrics that help developers, product owners, users etc gain more insights regarding the performance, operation, usage of the application. Metrics can be categorized based on the different personas we would like to target such as:</p>
 <ul class="simple">
-<li><p>when some user interacts with the GitHub App (external-trigger).</p></li>
-</ul>
-<p><img alt="Kebechet Schema" src="../../_images/kebechet-schema-external-trigger.png" /></p>
-<ul class="simple">
-<li><p>when internal components triggers learning of new knowledge and share of this knowledge with users (internal trigger)</p></li>
-</ul>
-<p><img alt="Kebechet Schema" src="../../_images/kebechet-schema-internal-trigger-package-release.png" /></p>
-<p>As you can see, there are different workflows that are triggered to manage your Python dependencies using Thoth’s recommendation system. You can request directly for guidance to the service (external trigger) or your repository will be automatically updated with the optimal Python software stack for your project without you having to lift your finger (internal trigger). You can have a detailed description of all the components involved into Kebechet <a class="reference internal" href="tooling.html"><span class="doc std std-doc">here</span></a>.</p>
-</div>
-<div class="section" id="monitoring">
-<h2>Monitoring<a class="headerlink" href="#monitoring" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><p><a class="reference external" href="https://github.com/AICoE/data-driven-development/blob/main/examples/kebechet/tooling.md">Tooling</a> -&gt; This section describes all components involved and used for monitoring and analytics.</p></li>
-<li><p><a class="reference external" href="https://github.com/AICoE/data-driven-development/blob/main/examples/kebechet/metrics.md">Metrics</a> -&gt; This section describes all the metrics defined for monitoring Kebechet</p></li>
-<li><p><a class="reference external" href="https://github.com/AICoE/data-driven-development/blob/main/examples/kebechet/collecting_and_storing_metrics.md">Collecting &amp; Storing metrics</a> -&gt; This section describes how metrics are collected by the different component and how they are stored.</p></li>
-<li><p><a class="reference external" href="https://github.com/AICoE/data-driven-development/blob/main/examples/kebechet/accessing_metrics.md">Accessing metrics</a> -&gt; This section describes how you can access the stored metrics.</p></li>
-<li><p><a class="reference external" href="https://github.com/AICoE/data-driven-development/blob/main/examples/kebechet/visualizing.md">Visualizing metrics</a> -&gt; This section describes how you can visualize the metrics directly or post processing them.</p></li>
-<li><p><a class="reference external" href="https://github.com/AICoE/data-driven-development/blob/main/examples/kebechet/alerting.md">Alerting</a> -&gt; This section describes how you can create alerts.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Product</span> <span class="pre">Owner</span></code> - Project’s key stakeholder who communicate the vision of the application to the team/stakeholders and ensure the feasibility of the application with respect to business objectives</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Project</span> <span class="pre">Manager</span></code> - Supervisors of other teams who would like to adopt the application for their use-cases and oversee the successful delivery of the application</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Technical</span> <span class="pre">Architect</span></code> -  Provides technical feasibility of requirements, advise on technology choices and manage the technical roadmap</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Operations</span></code> - Primarily focused on application management, application maintenance and instrumental in automation of application development processes</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Analyst</span></code> - Work with both developers and users to assess the product, utilizing data and user feedback to suggest improvements. Responsible for analyzing metrics to continually improve the application</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Users</span></code> - Users interacting with the application (who we are building the product for) and this can probably have sub categories for the different type of users</p></li>
 </ul>
 </div>
+<div class="section" id="recommended-metrics-kebechet">
+<h1>Recommended Metrics: Kebechet<a class="headerlink" href="#recommended-metrics-kebechet" title="Permalink to this headline">¶</a></h1>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>Metric</strong></p></th>
+<th class="head"><p><strong>Metric Definition</strong></p></th>
+<th class="head"><p><strong>Metric Calculation</strong></p></th>
+<th class="head"><p><strong>Targeted Persona</strong></p></th>
+<th class="head"><p><strong>Data Source</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Number of active users</p></td>
+<td><p>Number of repos where Kebechet is active</p></td>
+<td><p>sum(KebechetGithubAppInstallations Table slug with is_active=True)</p></td>
+<td><p>Product Owner</p></td>
+<td><p>PostgreSQL database (exposed by Thoth metrics-exporter)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Number of new active users (daily/weekly/monthly)</p></td>
+<td><p>Number of new repos where Kebechet is active</p></td>
+<td><p></p></td>
+<td><p>Product Owner</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>Number of stacks maintained</p></td>
+<td><p>Number of software stacks maintained by Kebechet</p></td>
+<td><p>sum(KebechetGithubAppInstallations Table slug with is_active=True, distinct=True)</p></td>
+<td><p>Product Owner</p></td>
+<td><p>Thoth database (exposed by metrics-exporter)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Number of users per manager (thoth adviser)</p></td>
+<td><p>Total number of users per manager (thoth adviser)</p></td>
+<td><p>sum(KebechetGithubAppInstallations Table slug with is_active=True, distinct=True, for KebechetGithubAppInstallations.thoth_advise_manager)</p></td>
+<td><p>Product Owner</p></td>
+<td><p>Thoth database (exposed by metrics-exporter)</p></td>
+</tr>
+<tr class="row-even"><td><p>Number of PR opened by Kebechet per manager (thoth adviser)</p></td>
+<td><p>Total number of PR opened by Kebechet</p></td>
+<td><p></p></td>
+<td><p>Product Owner</p></td>
+<td><p>Github (collected by mi)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Number of PR merged by Kebechet per manager (thoth adviser)</p></td>
+<td><p>Total number of PR opened by Kebechet merged</p></td>
+<td><p></p></td>
+<td><p>Product Owner</p></td>
+<td><p>Github (collected by mi)</p></td>
+</tr>
+<tr class="row-even"><td><p>Successful Kebechet service delivered percentage (thoth adviser)</p></td>
+<td><p></p></td>
+<td><p>(Number of PR merged by Kebechet ÷ Number of PR opened by Kebechet) * 100</p></td>
+<td><p>Product Owner</p></td>
+<td><p>Ceph (processed by mi)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Average time to merge Kebechet PRs (thoth adviser)</p></td>
+<td><p>Time taken to merge a PR opened by Kebechet</p></td>
+<td><p></p></td>
+<td><p>Product Owner</p></td>
+<td><p>Ceph (processed by mi)</p></td>
+</tr>
+<tr class="row-even"><td><p>Number of PR closed/rejected by Kebechet per manager (thoth adviser)</p></td>
+<td><p>Total number of PR opened by Kebechet closed/rejected</p></td>
+<td><p></p></td>
+<td><p>Product Owner</p></td>
+<td><p>Github (collected by mi)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Failed Kebechet service delivered percentage (thoth adviser)</p></td>
+<td><p></p></td>
+<td><p>(Number of PR closed/rejected  by Kebechet ÷ Number of PR opened by Kebechet) * 100</p></td>
+<td><p>Product Owner</p></td>
+<td><p>Ceph (processed by mi)</p></td>
+</tr>
+<tr class="row-even"><td><p>Number of PR opened by Kebechet per manager (thoth adviser) per type of PR</p></td>
+<td><p>Total number of PR opened by Kebechet for specific reasons (e.g. CVE update, new package release)</p></td>
+<td><p></p></td>
+<td><p>Product Owner</p></td>
+<td><p>Github (collected by mi)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Number of PR merged by Kebechet per manager (thoth adviser) per type of PR</p></td>
+<td><p>Total number of PR merged by Kebechet for specific reasons (e.g. CVE update, new package release)</p></td>
+<td><p></p></td>
+<td><p>Product Owner</p></td>
+<td><p>Github (collected by mi)</p></td>
+</tr>
+<tr class="row-even"><td><p>Average time to merge Kebechet PRs (thoth adviser) per type of PR</p></td>
+<td><p>Time taken to merge a PR opened by Kebechet</p></td>
+<td><p></p></td>
+<td><p>Product Owner</p></td>
+<td><p>Ceph (processed by mi)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Number of PR closed/rejected by Kebechet per manager (thoth adviser) per type of PR</p></td>
+<td><p>Total number of PR closed/rejected by Kebechet closed/rejected for specific reasons (e.g. CVE update, new package release)</p></td>
+<td><p></p></td>
+<td><p>Product Owner</p></td>
+<td><p>Github (collected by mi)</p></td>
+</tr>
+<tr class="row-even"><td><p>Time taken to review PRs</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>Analyst</p></td>
+<td><p>Ceph (processed by mi)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Average time taken by Kebechet workflow</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>Operations</p></td>
+<td><p>Argo Workflow Controller</p></td>
+</tr>
+<tr class="row-even"><td><p>Average time taken by Adviser workflow task</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>Operations</p></td>
+<td><p>Argo Workflow Controller</p></td>
+</tr>
+<tr class="row-odd"><td><p>Average time taken by Kebechet run results workflow task (in adviser)</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>Operations</p></td>
+<td><p>Argo Workflow Controller</p></td>
+</tr>
+<tr class="row-even"><td><p>Percentage of adviser requests scheduled respected to requested</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>Operations</p></td>
+<td><p>Ceph (processed by advise-reporter)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Percentage of adviser requests from Kebechet succeeded</p></td>
+<td><p></p></td>
+<td><p>number of successful adviser per source_type=KEBECHET</p></td>
+<td><p>Operations</p></td>
+<td><p>Ceph (processed by advise-reporter)</p></td>
+</tr>
+<tr class="row-even"><td><p>Percentage of adviser requests from Kebechet failed</p></td>
+<td><p></p></td>
+<td><p>number of failed adviser per source_type=KEBECHET</p></td>
+<td><p>Operations</p></td>
+<td><p>Ceph (processed by advise-reporter)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Number of Kafka messages sent per internal trigger to schedule Kebechet administrator</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>Operations</p></td>
+<td><p>Kafka producers (e.g. package-release)</p></td>
+</tr>
+<tr class="row-even"><td><p>Number of Kebechet workflows scheduled by workflow-controller</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>Operations</p></td>
+<td><p>Thoth investigator (Kafka consumer)</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 
     <script type="text/x-thebe-config">
@@ -331,19 +452,19 @@ replacement for it).</p>
 <div class='prev-next-bottom'>
     
     <div id="prev">
-        <a class="left-prev" href="../README.html" title="previous page">
+        <a class="left-prev" href="tooling.html" title="previous page">
             <i class="prevnext-label fas fa-angle-left"></i>
             <div class="prevnext-info">
                 <p class="prevnext-label">previous</p>
-                <p class="prevnext-title">Monitoring Applications</p>
+                <p class="prevnext-title">Tooling</p>
             </div>
         </a>
     </div>
      <div id="next">
-        <a class="right-next" href="tooling.html" title="next page">
+        <a class="right-next" href="accessing_metrics.html" title="next page">
             <div class="prevnext-info">
                 <p class="prevnext-label">next</p>
-                <p class="prevnext-title">Tooling</p>
+                <p class="prevnext-title">Accessing and Analyzing Metrics</p>
             </div>
             <i class="prevnext-label fas fa-angle-right"></i>
         </a>

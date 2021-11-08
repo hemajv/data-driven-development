@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Kebechet &#8212; Data Driven Development</title>
+    <title>Tooling &#8212; Data Driven Development</title>
     
   <link href="../../_static/css/theme.css" rel="stylesheet" />
   <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -51,8 +51,8 @@
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Tooling" href="tooling.html" />
-    <link rel="prev" title="Monitoring Applications" href="../README.html" />
+    <link rel="next" title="Monitoring Metrics" href="metrics.html" />
+    <link rel="prev" title="Kebechet" href="README.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -128,13 +128,13 @@
    Monitoring Applications
   </a>
  </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="README.html">
    Kebechet
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="tooling.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    Tooling
   </a>
  </li>
@@ -189,7 +189,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../../_sources/examples/kebechet/README.md"><button type="button"
+        <a class="dropdown-buttons" href="../../_sources/examples/kebechet/tooling.md"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.md</button></a>
         <!-- Download PDF via print -->
@@ -209,7 +209,7 @@
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
-            href="https://github.com/AICoE/data-driven-development/issues/new?title=Issue%20on%20page%20%2Fexamples/kebechet/README.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/AICoE/data-driven-development/issues/new?title=Issue%20on%20page%20%2Fexamples/kebechet/tooling.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
         
@@ -236,19 +236,31 @@
             <nav id="bd-toc-nav" aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#architecture">
-   Architecture
+  <a class="reference internal nav-link" href="#technical-infrastructure">
+   Technical Infrastructure
   </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#sequence-diagrams">
-   Sequence Diagrams
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#monitoring">
-   Monitoring
-  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#service-components">
+     Service components
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#application-components">
+     Application components
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#monitoring-components">
+     Monitoring Components
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#analytical-components">
+     Analytical Components
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 
@@ -261,43 +273,70 @@
         
               <div>
                 
-  <div class="section" id="kebechet">
-<h1>Kebechet<a class="headerlink" href="#kebechet" title="Permalink to this headline">¶</a></h1>
-<blockquote>
-<div><p>I’m Kebechet, goddess of freshness. I will keep your sources and dependencies fresh and up-to-date.</p>
-</div></blockquote>
-<p><a class="reference external" href="https://github.com/thoth-station/kebechet">Kebechet</a> is a SourceOps bot that automates updating dependencies of your project. Currently, it supports managing and
-updating Python projects based on <a class="reference external" href="https://docs.pipenv.org/">pipenv</a> files (<code class="docutils literal notranslate"><span class="pre">Pipfile</span></code> and <code class="docutils literal notranslate"><span class="pre">Pipfile.lock</span></code>) or
-<code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code>/<code class="docutils literal notranslate"><span class="pre">requirements.in</span></code> files (see <a class="reference external" href="https://pypi.org/project/pip-tools/">pip-tools</a> - Kebechet is a
-replacement for it).</p>
-<div class="section" id="architecture">
-<h2>Architecture<a class="headerlink" href="#architecture" title="Permalink to this headline">¶</a></h2>
-<p>The components and workflows of Kebechet can be found in the architecture schema below:</p>
-<p><img alt="Kebechet Schema" src="../../_images/kebechet-schema.png" /></p>
+  <div class="section" id="tooling">
+<h1>Tooling<a class="headerlink" href="#tooling" title="Permalink to this headline">¶</a></h1>
+<p>From the architecture schema of <a class="reference external" href="https://github.com/operate-first/data-driven-development/tree/main/examples/kebechet/README.md">Kebechet</a>, you can see that Kebechet requires multiple components and workflows to provide services. The major components and their functions are described below.</p>
+<div class="section" id="technical-infrastructure">
+<h2>Technical Infrastructure<a class="headerlink" href="#technical-infrastructure" title="Permalink to this headline">¶</a></h2>
+<p>This section describes the categories of components involved in the operational life of Kebechet application:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">service</span></code> -&gt; services that are used by the application and provided by the platform</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">application</span></code> -&gt; components or libraries that are created for the application</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">monitoring</span></code> -&gt; components or libraries that are created/used for monitoring and pushing metrics</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">analytics</span></code> -&gt; components or libraries that are created/used for providing analysis on the data collected</p></li>
+</ul>
+<div class="section" id="service-components">
+<h3>Service components<a class="headerlink" href="#service-components" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p><a class="reference external" href="https://kafka.apache.org/">Kafka</a> - an open-source distributed event streaming platform</p></li>
+<li><p><a class="reference external" href="https://argoproj.github.io/">Argo</a> - family of open source tools for Kubernetes to run workflows, manage clusters, and do GitOps right</p></li>
+<li><p><a class="reference external" href="https://ceph.io/en/">Ceph</a> - an open-source, distributed storage system</p></li>
+</ul>
 </div>
-<div class="section" id="sequence-diagrams">
-<h2>Sequence Diagrams<a class="headerlink" href="#sequence-diagrams" title="Permalink to this headline">¶</a></h2>
-<p>The two images below show two sequence diagrams of the behaviour of Kebechet in two cases:</p>
+<div class="section" id="application-components">
+<h3>Application components<a class="headerlink" href="#application-components" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li><p>when some user interacts with the GitHub App (external-trigger).</p></li>
+<li><p><a class="reference external" href="https://www.postgresql.org/">PostgreSQL Database</a> - open source object-relational database</p></li>
+<li><p><a class="reference external" href="https://github.com/thoth-station/storages">Thoth storages</a> - Thoth storages and database adapter</p></li>
+<li><p><a class="reference external" href="https://github.com/thoth-station/user-api">Thoth User API</a> - Thoth service interface and Kafka producer</p></li>
+<li><p><a class="reference external" href="https://github.com/thoth-station/investigator">Thoth Investigator</a> - Kafka consumer of messages sent by different components</p></li>
+<li><p><a class="reference external" href="https://argoproj.github.io/argo-workflows/workflow-controller-configmap/">Argo workflow controller</a> - Controller for scheduling and handling Argo workflows</p></li>
+<li><p><a class="reference external" href="https://argoproj.github.io/argo-workflows/">Argo workflows</a>. Each of them contain several steps:</p>
+<ul>
+<li><p><a class="reference external" href="https://github.com/thoth-station/thoth-application/blob/master/kebechet/base/openshift-templates/kebechet-administrator.yaml">Kebechet Administrator Argo workflow</a> - run Kebechet administrator that decides based on triggers which repo needs to receive a Kebechet update</p></li>
+<li><p><a class="reference external" href="https://github.com/thoth-station/thoth-application/blob/master/adviser/base/openshift-templates/adviser.yaml">Adviser Argo workflow</a> - run Thoth adviser recommender system</p></li>
+<li><p><a class="reference external" href="https://github.com/thoth-station/thoth-application/blob/master/kebechet/base/openshift-templates/kebechet.yaml">Kebechet Argo workflow</a> - run Kebechet component logic</p></li>
+<li><p><a class="reference external" href="https://github.com/thoth-station/thoth-application/blob/master/solver/base/openshift-templates/solve_and_sync-template.yaml">Solver Argo workflow</a> - run solver component to analyze python packages for different runtime environments, stores knowledge in the graph database and sends messages for scheduling Security workflows</p></li>
 </ul>
-<p><img alt="Kebechet Schema" src="../../_images/kebechet-schema-external-trigger.png" /></p>
-<ul class="simple">
-<li><p>when internal components triggers learning of new knowledge and share of this knowledge with users (internal trigger)</p></li>
+</li>
 </ul>
-<p><img alt="Kebechet Schema" src="../../_images/kebechet-schema-internal-trigger-package-release.png" /></p>
-<p>As you can see, there are different workflows that are triggered to manage your Python dependencies using Thoth’s recommendation system. You can request directly for guidance to the service (external trigger) or your repository will be automatically updated with the optimal Python software stack for your project without you having to lift your finger (internal trigger). You can have a detailed description of all the components involved into Kebechet <a class="reference internal" href="tooling.html"><span class="doc std std-doc">here</span></a>.</p>
 </div>
-<div class="section" id="monitoring">
-<h2>Monitoring<a class="headerlink" href="#monitoring" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="monitoring-components">
+<h3>Monitoring Components<a class="headerlink" href="#monitoring-components" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li><p><a class="reference external" href="https://github.com/AICoE/data-driven-development/blob/main/examples/kebechet/tooling.md">Tooling</a> -&gt; This section describes all components involved and used for monitoring and analytics.</p></li>
-<li><p><a class="reference external" href="https://github.com/AICoE/data-driven-development/blob/main/examples/kebechet/metrics.md">Metrics</a> -&gt; This section describes all the metrics defined for monitoring Kebechet</p></li>
-<li><p><a class="reference external" href="https://github.com/AICoE/data-driven-development/blob/main/examples/kebechet/collecting_and_storing_metrics.md">Collecting &amp; Storing metrics</a> -&gt; This section describes how metrics are collected by the different component and how they are stored.</p></li>
-<li><p><a class="reference external" href="https://github.com/AICoE/data-driven-development/blob/main/examples/kebechet/accessing_metrics.md">Accessing metrics</a> -&gt; This section describes how you can access the stored metrics.</p></li>
-<li><p><a class="reference external" href="https://github.com/AICoE/data-driven-development/blob/main/examples/kebechet/visualizing.md">Visualizing metrics</a> -&gt; This section describes how you can visualize the metrics directly or post processing them.</p></li>
-<li><p><a class="reference external" href="https://github.com/AICoE/data-driven-development/blob/main/examples/kebechet/alerting.md">Alerting</a> -&gt; This section describes how you can create alerts.</p></li>
+<li><p><a class="reference external" href="https://prometheus.io/">Prometheus</a> - Monitoring tool for collecting time series metrics. To learn more about Prometheus, refer to this documentation <a class="reference external" href="https://github.com/AICoE/data-driven-development/blob/main/data-sources/prometheus.md">here</a></p></li>
+<li><p><a class="reference external" href="https://grafana.com/">Grafana</a> - Visualization tool for creating dashboards/graphs of the metrics</p></li>
+<li><p><a class="reference external" href="https://github.com/thoth-station/mi-scheduler">Thoth MI Scheduler</a> - Tool to collect GitHub data</p></li>
+<li><p><a class="reference external" href="https://github.com/prometheus/alertmanager">GitHub Alertmanager</a> - Alertmanager that handles alerts and creates GitHub issues in the chosen repository to notify the respective teams</p></li>
+<li><p><a class="reference external" href="https://github.com/thoth-station/metrics-exporter">Thoth Metrics Exporter</a> - Component that evaluates content metrics from the database and sends metrics to Prometheus</p></li>
+<li><p><a class="reference external" href="https://github.com/thoth-station/graph-metrics-exporter">Thoth Graph metrics exporter</a> - Component that evaluates content metrics for long running processes (evaluating bloat data for example) from the database and sends metrics to Prometheus</p></li>
+<li><p><a class="reference external" href="https://github.com/prometheus-community/postgres_exporter">PostgreSQL metrics exporter</a> - Components that collect operational metrics from the database and send them to Prometheus</p></li>
 </ul>
+</div>
+<div class="section" id="analytical-components">
+<h3>Analytical Components<a class="headerlink" href="#analytical-components" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/AICoE/prometheus-api-client-python">Prometheus API client</a> - A Python wrapper for the Prometheus HTTP API</p></li>
+<li><p><a class="reference external" href="https://github.com/thoth-station/slo-reporter">Thoth SLO-reporter</a> - Aggregate, analyze and combine metrics from different sources (Prometheus or Ceph data), providing a report on SLI by email</p></li>
+<li><p><a class="reference external" href="https://github.com/thoth-station/reporter">Thoth reporter</a> - Aggregate, analyze and produce metrics from adviser reports that are stored on Ceph for visualization on Superset</p></li>
+<li><p><a class="reference external" href="https://github.com/thoth-station/mi-scheduler">Thoth MI Scheduler</a> - component that schedules mi workflows based on list of maintained GitHub repositories:</p>
+<ul>
+<li><p><a class="reference external" href="https://github.com/thoth-station/thoth-application/blob/master/mi-scheduler/base/openshift-templates/mi-run-template.yaml">MI Argo workflow</a> - component that collect GitHub metrics from GitHub repositories</p></li>
+</ul>
+</li>
+<li><p><a class="reference external" href="https://superset.apache.org/">Superset</a> - Superset is a modern data exploration and visualization platform</p></li>
+</ul>
+</div>
 </div>
 </div>
 
@@ -331,19 +370,19 @@ replacement for it).</p>
 <div class='prev-next-bottom'>
     
     <div id="prev">
-        <a class="left-prev" href="../README.html" title="previous page">
+        <a class="left-prev" href="README.html" title="previous page">
             <i class="prevnext-label fas fa-angle-left"></i>
             <div class="prevnext-info">
                 <p class="prevnext-label">previous</p>
-                <p class="prevnext-title">Monitoring Applications</p>
+                <p class="prevnext-title">Kebechet</p>
             </div>
         </a>
     </div>
      <div id="next">
-        <a class="right-next" href="tooling.html" title="next page">
+        <a class="right-next" href="metrics.html" title="next page">
             <div class="prevnext-info">
                 <p class="prevnext-label">next</p>
-                <p class="prevnext-title">Tooling</p>
+                <p class="prevnext-title">Monitoring Metrics</p>
             </div>
             <i class="prevnext-label fas fa-angle-right"></i>
         </a>
