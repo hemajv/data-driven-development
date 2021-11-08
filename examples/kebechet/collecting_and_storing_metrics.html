@@ -1,0 +1,705 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Collecting and Storing Metrics &#8212; Data Driven Development</title>
+    
+  <link href="../../_static/css/theme.css" rel="stylesheet" />
+  <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Accessing and Analyzing Metrics" href="accessing_metrics.html" />
+    <link rel="prev" title="Monitoring Metrics" href="metrics.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Data Driven Development</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../README.html">
+   Data Driven Development - D^3
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Data Sources
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../data-sources/prometheus.html">
+   Prometheus
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Data Presentation
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../data-presentation/grafana.html">
+   Grafana Dashboards
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../data-presentation/superset.html">
+   Superset
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Monitoring Applications Guide
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../README.html">
+   Monitoring Applications
+  </a>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="README.html">
+   Kebechet
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="tooling.html">
+     Tooling
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="metrics.html">
+     Monitoring Metrics
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Collecting and Storing Metrics
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="accessing_metrics.html">
+     Accessing and Analyzing Metrics
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="alerting.html">
+     Alerting
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/examples/kebechet/collecting_and_storing_metrics.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/AICoE/data-driven-development"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/AICoE/data-driven-development/issues/new?title=Issue%20on%20page%20%2Fexamples/kebechet/collecting_and_storing_metrics.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#prometheus-client">
+   Prometheus Client
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#three-step-demo">
+     Three Step Demo
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#flask-prometheus-exporter">
+   Flask Prometheus exporter
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dump-report-to-s3">
+   Dump report to S3
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#boto3">
+     boto3
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#thoth-storages">
+     thoth-storages
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#argo-workflow-metrics">
+   Argo Workflow Metrics
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="collecting-and-storing-metrics">
+<h1>Collecting and Storing Metrics<a class="headerlink" href="#collecting-and-storing-metrics" title="Permalink to this headline">¶</a></h1>
+<p>Once we know what kind of <a class="reference external" href="https://github.com/AICoE/data-driven-development/tree/main/examples/kebechet/metrics.md">metrics</a> we are interested in, we should be able to define them, collect them and store them.</p>
+<p>Based on the components described in the <a class="reference external" href="https://github.com/AICoE/data-driven-development/tree/main/examples/kebechet/tooling.md">tooling</a> section, there are different ways to store metrics.</p>
+<div class="section" id="prometheus-client">
+<h2>Prometheus Client<a class="headerlink" href="#prometheus-client" title="Permalink to this headline">¶</a></h2>
+<p>This <a class="reference external" href="https://github.com/prometheus/client_python">library</a> helps to add instrumentation to the code and implements the following <a class="reference external" href="https://prometheus.io/docs/concepts/metric_types/">Prometheus metric type</a>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Counter</span></code> - A counter is a cumulative metric that represents a single monotonically increasing counter whose value can only increase or be reset to zero on restart. For example, you can use a counter to represent the number of requests served, tasks completed, or errors.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Gauge</span></code> - A gauge is a metric that represents a single numerical value that can arbitrarily go up and down.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Histogram</span></code> - A histogram samples observations (usually things like request durations or response sizes) and counts them in configurable buckets. It also provides a sum of all observed values.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Summary</span></code> - Similar to a histogram, a summary samples observations (usually things like request durations and response sizes). While it also provides a total count of observations and a sum of all observed values, it calculates configurable quantiles over a sliding time window.</p></li>
+</ul>
+<p>This Python Prometheus client <a class="reference external" href="https://github.com/prometheus/client_python">library</a> lets you define and expose internal metrics via an HTTP endpoint on your application’s instance. When Prometheus scrapes your instance’s HTTP endpoint, the client library sends the current state of all tracked metrics to the server.</p>
+<div class="section" id="three-step-demo">
+<h3>Three Step Demo<a class="headerlink" href="#three-step-demo" title="Permalink to this headline">¶</a></h3>
+<p>This demo shows how to interact with the Prometheus API client and is available from the official Python Prometheus client <a class="reference external" href="https://github.com/prometheus/client_python">library</a>.</p>
+<p><strong>Step 1</strong>: Install the client</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">prometheus</span><span class="o">-</span><span class="n">client</span>
+</pre></div>
+</div>
+<p><strong>Step 2</strong>: Paste the following into a Python file and run it</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">prometheus_client</span> <span class="kn">import</span> <span class="n">start_http_server</span><span class="p">,</span> <span class="n">Summary</span>
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="c1"># Create a metric to track time spent and requests made.</span>
+<span class="n">REQUEST_TIME</span> <span class="o">=</span> <span class="n">Summary</span><span class="p">(</span><span class="s1">&#39;request_processing_seconds&#39;</span><span class="p">,</span> <span class="s1">&#39;Time spent processing request&#39;</span><span class="p">)</span>
+
+<span class="c1"># Decorate function with metric.</span>
+<span class="nd">@REQUEST_TIME.time</span><span class="p">()</span>
+<span class="k">def</span> <span class="nf">process_request</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;A dummy function that takes some time.&quot;&quot;&quot;</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="c1"># Start up the server to expose the metrics.</span>
+    <span class="n">start_http_server</span><span class="p">(</span><span class="mi">8000</span><span class="p">)</span>
+    <span class="c1"># Generate some requests.</span>
+    <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+        <span class="n">process_request</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">())</span>
+</pre></div>
+</div>
+<p><strong>Step 3</strong>: Visit <a class="reference external" href="http://localhost:8000/">http://localhost:8000/</a> to view the metrics</p>
+<p>From one easy to use decorator you get:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">request_processing_seconds_count</span></code>: Number of times this function was called.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">request_processing_seconds_sum</span></code>: Total amount of time spent in this function.</p></li>
+</ul>
+<p>Prometheus’s <code class="docutils literal notranslate"><span class="pre">rate</span></code> function allows calculation of both requests per second,
+and latency over time from this data.</p>
+<p>In addition if you’re on Linux the <code class="docutils literal notranslate"><span class="pre">process</span></code> metrics expose CPU, memory and
+other information about the process for free!</p>
+<p>Check the <a class="reference external" href="https://github.com/prometheus/client_python">library</a> docs for more information.</p>
+</div>
+</div>
+<div class="section" id="flask-prometheus-exporter">
+<h2>Flask Prometheus exporter<a class="headerlink" href="#flask-prometheus-exporter" title="Permalink to this headline">¶</a></h2>
+<p>This <a class="reference external" href="https://github.com/rycus86/prometheus_flask_exporter">library</a> provides HTTP request metrics to export into Prometheus. It can also track method invocations using convenient functions.</p>
+<p><strong>Step 1</strong>: Install the client</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">prometheus</span><span class="o">-</span><span class="n">flask</span><span class="o">-</span><span class="n">exporter</span>
+</pre></div>
+</div>
+<p><strong>Step 2</strong>: Paste the following into a Python file and run it</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">request</span>
+<span class="kn">from</span> <span class="nn">prometheus_flask_exporter</span> <span class="kn">import</span> <span class="n">PrometheusMetrics</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+<span class="n">metrics</span> <span class="o">=</span> <span class="n">PrometheusMetrics</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+
+<span class="c1"># static information as metric</span>
+<span class="n">metrics</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;app_info&#39;</span><span class="p">,</span> <span class="s1">&#39;Application info&#39;</span><span class="p">,</span> <span class="n">version</span><span class="o">=</span><span class="s1">&#39;1.0.3&#39;</span><span class="p">)</span>
+
+<span class="nd">@app.route</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="k">pass</span>  <span class="c1"># requests tracked by default</span>
+
+<span class="nd">@app.route</span><span class="p">(</span><span class="s1">&#39;/skip&#39;</span><span class="p">)</span>
+<span class="nd">@metrics.do_not_track</span><span class="p">()</span>
+<span class="k">def</span> <span class="nf">skip</span><span class="p">():</span>
+    <span class="k">pass</span>  <span class="c1"># default metrics are not collected</span>
+
+<span class="nd">@app.route</span><span class="p">(</span><span class="s1">&#39;/&lt;item_type&gt;&#39;</span><span class="p">)</span>
+<span class="nd">@metrics.do_not_track</span><span class="p">()</span>
+<span class="nd">@metrics.counter</span><span class="p">(</span><span class="s1">&#39;invocation_by_type&#39;</span><span class="p">,</span> <span class="s1">&#39;Number of invocations by type&#39;</span><span class="p">,</span>
+         <span class="n">labels</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;item_type&#39;</span><span class="p">:</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">request</span><span class="o">.</span><span class="n">view_args</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]})</span>
+<span class="k">def</span> <span class="nf">by_type</span><span class="p">(</span><span class="n">item_type</span><span class="p">):</span>
+    <span class="k">pass</span>  <span class="c1"># only the counter is collected, not the default metrics</span>
+
+<span class="nd">@app.route</span><span class="p">(</span><span class="s1">&#39;/long-running&#39;</span><span class="p">)</span>
+<span class="nd">@metrics.gauge</span><span class="p">(</span><span class="s1">&#39;in_progress&#39;</span><span class="p">,</span> <span class="s1">&#39;Long running requests in progress&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">long_running</span><span class="p">():</span>
+    <span class="k">pass</span>
+
+<span class="nd">@app.route</span><span class="p">(</span><span class="s1">&#39;/status/&lt;int:status&gt;&#39;</span><span class="p">)</span>
+<span class="nd">@metrics.do_not_track</span><span class="p">()</span>
+<span class="nd">@metrics.summary</span><span class="p">(</span><span class="s1">&#39;requests_by_status&#39;</span><span class="p">,</span> <span class="s1">&#39;Request latencies by status&#39;</span><span class="p">,</span>
+                 <span class="n">labels</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">r</span><span class="p">:</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span><span class="p">})</span>
+<span class="nd">@metrics.histogram</span><span class="p">(</span><span class="s1">&#39;requests_by_status_and_path&#39;</span><span class="p">,</span> <span class="s1">&#39;Request latencies by status and path&#39;</span><span class="p">,</span>
+                   <span class="n">labels</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">r</span><span class="p">:</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="s1">&#39;path&#39;</span><span class="p">:</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">request</span><span class="o">.</span><span class="n">path</span><span class="p">})</span>
+<span class="k">def</span> <span class="nf">echo_status</span><span class="p">(</span><span class="n">status</span><span class="p">):</span>
+    <span class="k">return</span> <span class="s1">&#39;Status: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">status</span><span class="p">,</span> <span class="n">status</span>
+</pre></div>
+</div>
+<p>Check the <a class="reference external" href="https://github.com/rycus86/prometheus_flask_exporter">library</a> docs for more information.</p>
+</div>
+<div class="section" id="dump-report-to-s3">
+<h2>Dump report to S3<a class="headerlink" href="#dump-report-to-s3" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="boto3">
+<h3>boto3<a class="headerlink" href="#boto3" title="Permalink to this headline">¶</a></h3>
+<p>You can use the Python AWS SDK <a class="reference external" href="https://github.com/boto/boto3">boto3</a> to create, configure, and manage AWS services, such as Amazon Elastic Compute Cloud (Amazon EC2) and Amazon Simple Storage Service (Amazon S3). The SDK provides an object-oriented API as well as low-level access to AWS services.</p>
+<p><strong>Step 1</strong>: Install the library</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">boto3</span>
+</pre></div>
+</div>
+<p><strong>Step 2</strong>: Paste the following into a Python file with your env variables and run it</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">boto3</span>
+
+<span class="c1"># Download files from S3</span>
+<span class="n">s3_endpoint_url</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;OBJECT_STORAGE_ENDPOINT_URL&quot;</span><span class="p">]</span>
+<span class="n">s3_access_key</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;AWS_ACCESS_KEY_ID&quot;</span><span class="p">]</span>
+<span class="n">s3_secret_key</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;AWS_SECRET_ACCESS_KEY&quot;</span><span class="p">]</span>
+<span class="n">s3_bucket</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;OBJECT_STORAGE_BUCKET_NAME&quot;</span><span class="p">]</span>
+
+<span class="c1"># Create an S3 client</span>
+<span class="n">s3</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span>
+    <span class="n">service_name</span><span class="o">=</span><span class="s2">&quot;s3&quot;</span><span class="p">,</span>
+    <span class="n">aws_access_key_id</span><span class="o">=</span><span class="n">s3_access_key</span><span class="p">,</span>
+    <span class="n">aws_secret_access_key</span><span class="o">=</span><span class="n">s3_secret_key</span><span class="p">,</span>
+    <span class="n">endpoint_url</span><span class="o">=</span><span class="n">s3_endpoint_url</span><span class="p">,</span>
+<span class="p">)</span>
+
+</pre></div>
+</div>
+<p>This will start a client that can be used to perform different actions, e.g. <code class="docutils literal notranslate"><span class="pre">upload</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">s3</span><span class="o">.</span><span class="n">upload_file</span><span class="p">(</span>
+    <span class="n">Bucket</span><span class="o">=</span><span class="n">s3_bucket</span><span class="p">,</span> <span class="n">Key</span><span class="o">=</span><span class="n">key</span><span class="p">,</span> <span class="n">Filename</span><span class="o">=</span><span class="n">filename</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="thoth-storages">
+<h3>thoth-storages<a class="headerlink" href="#thoth-storages" title="Permalink to this headline">¶</a></h3>
+<p>Kebechet uses boto3 library through <a class="reference external" href="https://github.com/thoth-station/storages">thoth-storages</a>, which is storage and database adapter for Project Thoth.</p>
+<p><strong>Step 1</strong>: Install the library</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">thoth</span><span class="o">-</span><span class="n">storages</span>
+</pre></div>
+</div>
+<p><strong>Step 2</strong>: Access Ceph and store data</p>
+<p>To access data on Ceph, you need to know <code class="docutils literal notranslate"><span class="pre">aws_access_key_id</span></code> and <code class="docutils literal notranslate"><span class="pre">aws_secret_access_key</span></code> credentials
+of the endpoint you are connecting to.</p>
+<p>Absolute file path of the data you are acccessing is constructed as: <code class="docutils literal notranslate"><span class="pre">s3://&lt;bucket_name&gt;/&lt;prefix_name&gt;/&lt;file_path&gt;</span></code></p>
+<p>You can either configure these environemnt variables to initilaize the data handler:</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Variable name</p></th>
+<th class="head"><p>Content</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">S3_ENDPOINT_URL</span></code></p></td>
+<td><p>Ceph Host name</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">CEPH_BUCKET</span></code></p></td>
+<td><p>Ceph Bucket name</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">CEPH_BUCKET_PREFIX</span></code></p></td>
+<td><p>Ceph Prefix</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">CEPH_KEY_ID</span></code></p></td>
+<td><p>Ceph Key ID</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">CEPH_SECRET_KEY</span></code></p></td>
+<td><p>Ceph Secret Key</p></td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">thoth.storages.ceph</span> <span class="kn">import</span> <span class="n">CephStore</span>
+<span class="n">s3</span> <span class="o">=</span> <span class="n">CephStore</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Or you can initialize the object directly with them:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">thoth.storages.ceph</span> <span class="kn">import</span> <span class="n">CephStore</span>
+<span class="n">ceph</span> <span class="o">=</span> <span class="n">CephStore</span><span class="p">(</span>
+    <span class="n">key_id</span><span class="o">=&lt;</span><span class="n">aws_access_key_id</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">secret_key</span><span class="o">=&lt;</span><span class="n">aws_secret_access_key</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">prefix</span><span class="o">=&lt;</span><span class="n">prefix_name</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">host</span><span class="o">=&lt;</span><span class="n">endpoint_url</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">bucket</span><span class="o">=&lt;</span><span class="n">bucket_name</span><span class="o">&gt;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>After initialization, you are ready to store the data.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">s3</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="c1"># For dictionary stored as json</span>
+    <span class="n">s3</span><span class="o">.</span><span class="n">store_file</span><span class="p">(</span><span class="o">&lt;</span><span class="n">file_path</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">file_id</span><span class="o">&gt;</span><span class="p">)</span>
+
+<span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+    <span class="c1"># File could not be stored</span>
+
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="argo-workflow-metrics">
+<h2>Argo Workflow Metrics<a class="headerlink" href="#argo-workflow-metrics" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://argoproj.github.io/argo-workflows/metrics/">Argo workflows metrics</a> can push automatically to <a class="reference external" href="https://prometheus.io/">Prometheus</a>. <a class="reference external" href="https://argoproj.github.io/argo-workflows/workflow-controller-configmap/">Argo</a> emits a certain number of controller metrics that inform on the state of the controller at any given time. Furthermore, users can also define their own custom metrics to inform on the state of their Workflows.</p>
+<p>You can add a metrics section to your Argo workflow <a class="reference external" href="https://github.com/thoth-station/thoth-application/blob/master/adviser/base/openshift-templates/adviser.yaml">template</a> like so:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">template.openshift.io/v1</span>
+<span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Template</span>
+<span class="nt">metadata</span><span class="p">:</span>
+  <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">adviser</span>
+  <span class="nt">annotations</span><span class="p">:</span>
+    <span class="nt">description</span><span class="p">:</span> <span class="nt">&quot;Thoth</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Adviser&quot;</span>
+    <span class="nt">openshift.io/display-name</span><span class="p">:</span> <span class="nt">&quot;Thoth</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Adviser&quot;</span>
+    <span class="nt">tags</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">thoth,ai-stacks,adviser</span>
+    <span class="nt">template.openshift.io/documentation-url</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">https://github.com/Thoth-Station/</span>
+    <span class="nt">template.openshift.io/long-description</span><span class="p">:</span> <span class="p p-Indicator">&gt;</span>
+      <span class="no">This template defines resources needed to run recommendation logic of Thoth to OpenShift.</span>
+    <span class="nt">template.openshift.io/provider-display-name</span><span class="p">:</span> <span class="s">&quot;Red</span><span class="nv"> </span><span class="s">Hat,</span><span class="nv"> </span><span class="s">Inc.&quot;</span>
+  <span class="nt">labels</span><span class="p">:</span>
+    <span class="nt">app</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">thoth</span>
+    <span class="nt">template</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">adviser</span>
+    <span class="nt">component</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">adviser</span>
+
+<span class="nt">parameters</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">THOTH_ADVISER_JOB_ID</span>
+    <span class="nt">required</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+    <span class="nt">description</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">A unique dentifier of adviser job.</span>
+    <span class="nt">displayName</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Adviser id</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">...</span>
+
+<span class="nt">objects</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">argoproj.io/v1alpha1</span>
+    <span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Workflow</span>
+    <span class="nt">metadata</span><span class="p">:</span>
+      <span class="nt">name</span><span class="p">:</span> <span class="s">&quot;${THOTH_ADVISER_JOB_ID}&quot;</span>
+      <span class="nt">labels</span><span class="p">:</span>
+        <span class="nt">app</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">thoth</span>
+        <span class="nt">component</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">adviser</span>
+    <span class="nt">spec</span><span class="p">:</span>
+      <span class="nt">serviceAccountName</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">argo</span>
+      <span class="nt">activeDeadlineSeconds</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">3000</span>
+      <span class="nt">ttlStrategy</span><span class="p">:</span>
+        <span class="nt">secondsAfterCompletion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">300</span>
+        <span class="nt">secondsAfterSuccess</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">300</span>
+        <span class="nt">secondsAfterFailure</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">300</span>
+      <span class="nt">entrypoint</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">adviser</span>
+
+      <span class="nt">metrics</span><span class="p">:</span>
+        <span class="nt">prometheus</span><span class="p">:</span>
+          <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">status_counter</span>
+            <span class="nt">help</span><span class="p">:</span> <span class="s">&quot;Count</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">workflow</span><span class="nv"> </span><span class="s">by</span><span class="nv"> </span><span class="s">status&quot;</span>
+            <span class="nt">labels</span><span class="p">:</span>
+              <span class="p p-Indicator">-</span> <span class="nt">key</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">name</span>
+                <span class="nt">value</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">adviser</span>
+              <span class="p p-Indicator">-</span> <span class="nt">key</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">status</span>
+                <span class="nt">value</span><span class="p">:</span> <span class="s">&quot;{{workflow.status}}&quot;</span>
+            <span class="nt">counter</span><span class="p">:</span>
+              <span class="nt">value</span><span class="p">:</span> <span class="s">&quot;1&quot;</span>
+
+          <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">duration_seconds_histogram</span>
+            <span class="nt">help</span><span class="p">:</span> <span class="s">&quot;Duration</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">workflow</span><span class="nv"> </span><span class="s">when</span><span class="nv"> </span><span class="s">succeded&quot;</span>
+            <span class="nt">when</span><span class="p">:</span> <span class="s">&quot;{{workflow.status}}</span><span class="nv"> </span><span class="s">==</span><span class="nv"> </span><span class="s">Succeeded&quot;</span>
+            <span class="nt">labels</span><span class="p">:</span>
+              <span class="p p-Indicator">-</span> <span class="nt">key</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">name</span>
+                <span class="nt">value</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">adviser</span>
+            <span class="nt">histogram</span><span class="p">:</span>
+              <span class="nt">buckets</span><span class="p">:</span>
+                <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">5</span>
+                <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">10</span>
+                <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">30</span>
+                <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">60</span>
+                <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">120</span>
+                <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">180</span>
+                <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">300</span>
+                <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">600</span>
+                <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">900</span>
+              <span class="nt">value</span><span class="p">:</span> <span class="s">&quot;{{workflow.duration}}&quot;</span>
+</pre></div>
+</div>
+<p>You can also add a metrics section to a particular <a class="reference external" href="https://github.com/thoth-station/thoth-application/blob/master/adviser/base/argo-workflows/advise.yaml">task</a> in your Argo Workflow:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nn">---</span>
+<span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">argoproj.io/v1alpha1</span>
+<span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">WorkflowTemplate</span>
+<span class="nt">metadata</span><span class="p">:</span>
+  <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">advise</span>
+  <span class="nt">annotations</span><span class="p">:</span>
+    <span class="nt">operation</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">adviser</span>
+<span class="nt">spec</span><span class="p">:</span>
+  <span class="nt">templates</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">advise</span>
+      <span class="nt">metrics</span><span class="p">:</span>
+        <span class="nt">prometheus</span><span class="p">:</span>
+          <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">task_status_counter</span>
+            <span class="nt">help</span><span class="p">:</span> <span class="s">&quot;Count</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">workflow</span><span class="nv"> </span><span class="s">task</span><span class="nv"> </span><span class="s">by</span><span class="nv"> </span><span class="s">status&quot;</span>
+            <span class="nt">labels</span><span class="p">:</span>
+              <span class="p p-Indicator">-</span> <span class="nt">key</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">name</span>
+                <span class="nt">value</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">adviser</span>
+              <span class="p p-Indicator">-</span> <span class="nt">key</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">status</span>
+                <span class="nt">value</span><span class="p">:</span> <span class="s">&quot;{{status}}&quot;</span>
+            <span class="nt">counter</span><span class="p">:</span>
+              <span class="nt">value</span><span class="p">:</span> <span class="s">&quot;1&quot;</span>
+
+          <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">task_duration_seconds_histogram</span>
+            <span class="nt">help</span><span class="p">:</span> <span class="s">&quot;Duration</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">workflow</span><span class="nv"> </span><span class="s">task</span><span class="nv"> </span><span class="s">when</span><span class="nv"> </span><span class="s">succeded&quot;</span>
+            <span class="nt">when</span><span class="p">:</span> <span class="s">&quot;{{status}}</span><span class="nv"> </span><span class="s">==</span><span class="nv"> </span><span class="s">Succeeded&quot;</span>
+            <span class="nt">labels</span><span class="p">:</span>
+              <span class="p p-Indicator">-</span> <span class="nt">key</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">name</span>
+                <span class="nt">value</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">adviser</span>
+            <span class="nt">histogram</span><span class="p">:</span>
+              <span class="nt">buckets</span><span class="p">:</span>
+                <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">5</span>
+                <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">10</span>
+                <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">30</span>
+                <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">60</span>
+                <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">120</span>
+                <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">180</span>
+                <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">300</span>
+                <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">600</span>
+                <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">900</span>
+              <span class="nt">value</span><span class="p">:</span> <span class="s">&quot;{{duration}}&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./examples/kebechet"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+    <div id="prev">
+        <a class="left-prev" href="metrics.html" title="previous page">
+            <i class="prevnext-label fas fa-angle-left"></i>
+            <div class="prevnext-info">
+                <p class="prevnext-label">previous</p>
+                <p class="prevnext-title">Monitoring Metrics</p>
+            </div>
+        </a>
+    </div>
+     <div id="next">
+        <a class="right-next" href="accessing_metrics.html" title="next page">
+            <div class="prevnext-info">
+                <p class="prevnext-label">next</p>
+                <p class="prevnext-title">Accessing and Analyzing Metrics</p>
+            </div>
+            <i class="prevnext-label fas fa-angle-right"></i>
+        </a>
+     </div>
+
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="container">
+      <p>
+        
+          By AICoE<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>
