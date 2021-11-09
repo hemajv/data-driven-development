@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Accessing and Analyzing Metrics &#8212; Data Driven Development</title>
+    <title>Accessing Metrics &#8212; Data Driven Development</title>
     
   <link href="../../_static/css/theme.css" rel="stylesheet" />
   <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -71,6 +71,11 @@
         <div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../../index.html">
       
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../../_static/aicoe-logo.png" class="logo" alt="logo">
       
       
       <h1 class="site-logo" id="site-title">Data Driven Development</h1>
@@ -155,7 +160,7 @@
    </li>
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
-     Accessing and Analyzing Metrics
+     Accessing Metrics
     </a>
    </li>
    <li class="toctree-l2">
@@ -273,8 +278,8 @@
         
               <div>
                 
-  <div class="section" id="accessing-and-analyzing-metrics">
-<h1>Accessing and Analyzing Metrics<a class="headerlink" href="#accessing-and-analyzing-metrics" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="accessing-metrics">
+<h1>Accessing Metrics<a class="headerlink" href="#accessing-metrics" title="Permalink to this headline">¶</a></h1>
 <p>Once we have the metrics collected and stored, to better explore and analyze them, we should be able to programmatically access the metrics via relevant tools such as Jupyter notebooks.</p>
 <p>Since a majority of our metrics are from <a class="reference external" href="https://prometheus.io/">Prometheus</a>, we find it best to explore the metrics using the <a class="reference external" href="https://github.com/AICoE/prometheus-api-client-python">Prometheus API client</a> within <a class="reference external" href="https://jupyter.org/">Jupyter</a> notebooks. Prometheus collects metrics (time series data) from configured targets at given intervals, evaluates rule expressions, displays the results, and can trigger alerts if some condition is observed to be true. The raw time series data obtained from a Prometheus host can sometimes be hard to interpret. To help better understand these metrics we have created a Python wrapper for the Prometheus http api for easier metrics processing and analysis.</p>
 <div class="section" id="connecting-and-collecting-metrics-from-a-prometheus-host">
@@ -432,7 +437,7 @@
     <div class="container">
       <p>
         
-          By AICoE<br/>
+          By Red Hat Artificial Intelligence Center of Excellence (AICoE)<br/>
         
             &copy; Copyright 2021.<br/>
       </p>
